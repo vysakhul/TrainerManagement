@@ -10,11 +10,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Waiter {
 	
-	public static WebElement eleWait(WebDriver driver, By locator, int timeout)
+	public static WebElement waitForEle(WebDriver driver, By locator, int timeout)
 	{
 		WebDriverWait mywait = new WebDriverWait(driver,Duration.ofSeconds(timeout));
 		mywait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 		return driver.findElement(locator);
 	}
 	
+	public static WebElement waitForEle(WebDriver driver, WebElement locator, int timeout)
+	{
+		WebDriverWait mywait = new WebDriverWait(driver,Duration.ofSeconds(timeout));
+		mywait.until(ExpectedConditions.visibilityOfAllElements(locator));
+		return locator;
+	}
 }

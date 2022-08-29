@@ -5,7 +5,7 @@
     <classes>
       <class name="com.trainermgm.scripts.TestCases">
         <methods>
-          <include name="verifyValidLogin"/>
+          <include name="verifyViewAllocation"/>
           <include name="onSetup"/>
         </methods>
       </class> <!-- com.trainermgm.scripts.TestCases -->

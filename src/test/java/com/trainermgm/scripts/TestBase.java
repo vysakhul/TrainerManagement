@@ -11,8 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeTest;
-
-import com.trainermgm.pages.AdminHome;
 import com.trainermgm.utilities.Waiter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -35,25 +33,7 @@ public class TestBase {
 		}
 		
 	}
-	
-	public void adminHomeWait()
-	{
-		By elelocator = By.xpath(AdminHome.rejectBtn_Loc);
-		Waiter.eleWait(driver, elelocator, 10);
-	}
-	
-	public void allocateWait()
-	{
-		By elelocator = By.xpath("//a[@class='btn btn-success']");
-		Waiter.eleWait(driver, elelocator, 10);
-	}
-	
-	public void viewAllocationWait()
-	{
-		By elelocator = By.xpath("//td[contains(text(), 'ICT')]");
-		Waiter.eleWait(driver, elelocator, 10);
-	}
-	
+
 
 	@BeforeTest
 	public void onSetup()
@@ -74,5 +54,7 @@ public class TestBase {
 		driver.get(prop.getProperty("url"));
 		driver.manage().window().maximize();
 	}
+	
+	
 
 }
