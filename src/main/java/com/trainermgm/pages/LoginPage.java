@@ -21,6 +21,9 @@ public class LoginPage {
 	@FindBy(id="floatingPassword")
 	private WebElement password;
 	
+	@FindBy(xpath="//small[normalize-space()='Please enter a valid password']")
+	private WebElement errPassword;
+	
 	@FindBy(xpath="//button[@class='w-100 btn btn-lg btn-primary']")
 	private WebElement login;
 	
@@ -48,7 +51,33 @@ public class LoginPage {
 		login.click();
 	}
 	
-	public void adminLogin() throws IOException
+	public String getUsernameError()
+	{
+		return errUsername.getText();
+	}
+	
+	public String getPasswordError()
+	{
+		return errPassword.getText();
+	}
+	
+	public String getInvalidLoginError()
+	{
+		return errInvalidLogin.getText();
+	}
+	
+	public Boolean LoginBtnStatus()
+	{
+		return login.isEnabled();
+	}
+	
+	public void clearFields()
+	{
+		username.clear();
+		password.clear();
+	}
+	
+	public void adminLogin() throws IOException, InterruptedException
 	{
 		String username = ExcelUtility.getCellData("Logins", 1, 1);
 		String password = ExcelUtility.getCellData("Logins", 1, 2);
@@ -57,7 +86,7 @@ public class LoginPage {
 		clickLogin();
 	}
 	
-	public void trainerLogin() throws IOException
+	public void trainerLogin() throws IOException, InterruptedException
 	{
 		String username = ExcelUtility.getCellData("Logins", 2, 1);
 		String password = ExcelUtility.getCellData("Logins", 2, 2);

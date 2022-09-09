@@ -21,6 +21,7 @@ public class Screenshooter {
 	public static void getFullScreenshot(WebDriver driver) throws InterruptedException
 	{
 	PageScroller.scollToTop(driver);
+	Thread.sleep(4000);
 	TakesScreenshot ts = (TakesScreenshot)driver;
 	File src = ts.getScreenshotAs(OutputType.FILE);
 	

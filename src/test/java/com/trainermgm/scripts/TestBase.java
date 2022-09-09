@@ -6,12 +6,10 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.BeforeTest;
-import com.trainermgm.utilities.Waiter;
+import org.testng.annotations.BeforeMethod;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -33,9 +31,9 @@ public class TestBase {
 		}
 		
 	}
+		
 
-
-	@BeforeTest
+	@BeforeMethod
 	public void onSetup()
 	{
 		configLoad();

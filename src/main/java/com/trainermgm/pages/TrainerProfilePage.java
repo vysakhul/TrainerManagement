@@ -1,9 +1,14 @@
 package com.trainermgm.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import com.trainermgm.utilities.PageScroller;
+import com.trainermgm.utilities.Waiter;
 
 public class TrainerProfilePage {
 	WebDriver driver;
@@ -21,6 +26,30 @@ public class TrainerProfilePage {
 	
 	@FindBy(xpath="//a[normalize-space()='Logout']")
 	private WebElement logoutNav;
+	
+	@FindBy(xpath="//tr[1]/td[2]")
+	private List<WebElement> mainPhone;
+	
+	@FindBy(xpath="//tr[2]/td[2]")
+	private List<WebElement> mainEmail;
+	
+	@FindBy(xpath="//tr[3]/td[2]")
+	private List<WebElement> mainAddress;
+	
+	@FindBy(xpath="//tr[4]/td[2]")
+	private List<WebElement> mainQual;
+	
+	@FindBy(xpath="//tr[5]/td[2]")
+	private List<WebElement> mainCompany;
+	
+	@FindBy(xpath="//tr[6]/td[2]")
+	private List<WebElement> mainDesig;
+	
+	@FindBy(xpath="//tr[7]/td[2]")
+	private List<WebElement> mainSkill;
+	
+	@FindBy(xpath="//table")
+	private WebElement table;
 	
 	//EDIT PROFILE PAGE
 	
@@ -78,6 +107,9 @@ public class TrainerProfilePage {
 	@FindBy(xpath="//button[@class='btn btn-success']")
 	private WebElement editBtn;
 	
+	@FindBy(xpath="//form")
+	private WebElement form;
+	
 	
 	public TrainerProfilePage(WebDriver driver)
 	{
@@ -85,7 +117,80 @@ public class TrainerProfilePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void setName(String nm)
+	public void clickEditBtn()
+	{
+		editProfileBtn.click();
+	}
+	
+	public String getPhone() throws InterruptedException
+	{
+		Waiter.waitForValue(mainPhone);
+		return mainPhone.get(0).getText();
+	}
+	
+	public String getEmail() throws InterruptedException
+	{
+		Waiter.waitForValue(mainEmail);
+		return mainEmail.get(0).getText();
+	}
+	
+	public String getAddress() throws InterruptedException
+	{
+		Waiter.waitForValue(mainAddress);
+		return mainAddress.get(0).getText();
+	}
+	
+	public String getQual() throws InterruptedException
+	{
+		Waiter.waitForValue(mainQual);
+		return mainQual.get(0).getText();
+	}
+	
+	public String getCompany() throws InterruptedException
+	{
+		Waiter.waitForValue(mainCompany);
+		return mainCompany.get(0).getText();
+	}
+	
+	public String getDesig() throws InterruptedException
+	{
+		Waiter.waitForValue(mainDesig);
+		return mainDesig.get(0).getText();
+	}
+	
+	public String getSkill() throws InterruptedException
+	{
+		Waiter.waitForValue(mainSkill);
+		return mainSkill.get(0).getText();
+	}
+	
+//	public void waitForValue(List<WebElement> ele) throws InterruptedException
+//	{
+//		while(ele.get(0).getText().isEmpty())
+//		{
+//			Thread.sleep(100);
+//		}
+//	}
+//	
+//	public void waitForValue(WebElement ele) throws InterruptedException
+//	{
+//		while(ele.getText().isEmpty())
+//		{
+//			Thread.sleep(100);
+//		}
+//	}
+	
+	
+	
+	
+	// TRAINER PROFILE EDIT
+	
+	public void waitForAutoContent() throws InterruptedException
+	{
+		Waiter.waitForValue(name);
+	}
+	
+	public void setName(String nm) throws InterruptedException
 	{
 		name.clear();
 		name.sendKeys(nm);
@@ -138,8 +243,60 @@ public class TrainerProfilePage {
 		imagePicker.sendKeys(imglink);
 	}
 	
-	public void clickSave()
+	public void clickSave() throws InterruptedException
 	{
+		PageScroller.scrollIntoView(driver, editBtn);
 		editBtn.click();
+	}
+	
+	public String getNameError()
+	{
+		return errName.getText();
+	}
+	
+	public String getMailError()
+	{
+		return errEmail.getText();
+	}
+	
+	public String getPhoneError()
+	{
+		return errPhone.getText();
+	}
+	
+	public String getAddressError()
+	{
+		return errAddress.getText();
+	}
+	
+	public String getQualifError()
+	{
+		return errQual.getText();
+	}
+	
+	public String getSkillError()
+	{
+		return errSkill.getText();
+	}
+	
+	public String getCompanyError()
+	{
+		return errCompany.getText();
+	}
+	
+	public String getDesigError()
+	{
+		return errDesig.getText();
+	}
+	
+	public Boolean btnStatus() throws InterruptedException
+	{
+		PageScroller.scrollIntoView(driver, editBtn);
+		return editBtn.isEnabled();
+	}
+	
+	public void waitForFields()
+	{
+		Waiter.waitForEle(driver, form, 10);
 	}
 }

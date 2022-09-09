@@ -10,7 +10,7 @@ public class PageScroller {
 	public static void scrollIntoView(WebDriver driver, WebElement ele) throws InterruptedException
 	{
 	JavascriptExecutor js = (JavascriptExecutor) driver;
-	js.executeScript("arguments[0].scrollIntoView(ele)");
+	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", ele);
 	Thread.sleep(500);
 	}
 	

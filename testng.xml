@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Test">
+    <classes>
+      <class name="com.trainermgm.scripts.TestBase"/>
+      <class name="com.trainermgm.scripts.TestCases">
+     <!-- <methods>
+      <include name="verifySignUpAccess_REQ01_T1" />
+      </methods> --> 
+      </class>
+    </classes>
+  </test> 
+</suite> 
+

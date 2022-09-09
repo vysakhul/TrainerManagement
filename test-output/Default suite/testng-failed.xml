@@ -5,8 +5,10 @@
     <classes>
       <class name="com.trainermgm.scripts.TestCases">
         <methods>
-          <include name="verifyViewAllocation"/>
           <include name="onSetup"/>
+          <include name="verifySignUpAccess_REQ01_T1"/>
+          <include name="close"/>
+          <include name="createObj"/>
         </methods>
       </class> <!-- com.trainermgm.scripts.TestCases -->
     </classes>

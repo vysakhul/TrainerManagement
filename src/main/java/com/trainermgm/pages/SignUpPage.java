@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.trainermgm.constants.AutomationConstants;
+import com.trainermgm.utilities.DropdownListChecker;
 import com.trainermgm.utilities.PageScroller;
 
 public class SignUpPage {
@@ -165,10 +167,100 @@ public class SignUpPage {
 		submitbtn.click();
 	}
 	
+	public String getNameError()
+	{
+		return errName.getText();
+	}
+	
+	public String getMailError()
+	{
+		return errEmail.getText();
+	}
+	
+	public String getPhoneError()
+	{
+		return errPhone.getText();
+	}
+	
+	public String getAddressError()
+	{
+		return errAddress.getText();
+	}
+	
+	public String getQualifError()
+	{
+		return errQual.getText();
+	}
+	
+	public String getSkillError()
+	{
+		return errSkill.getText();
+	}
+	
+	public String getCompanyError()
+	{
+		return errCompany.getText();
+	}
+	
+	public String getDesigError()
+	{
+		return errDesig.getText();
+	}
+	
+	public String getImgPickerError()
+	{
+		return errImgpicker.getText();
+	}
+	
+	public String getPasswordError()
+	{
+		return errPass.getText();
+	}
+	
+	public String getRePassError()
+	{
+		return errRepass.getText();
+	}
+	
+//	public Boolean getCourseList() throws InterruptedException
+//	{
+//		int counter = 0;
+//		Boolean listStatus = true;
+//		int actLen = courses.size();
+//		int expLen = AutomationConstants.COURSES.length;
+//		if(actLen == expLen)
+//		{
+//			coursebtn.click();
+//			PageScroller.scrollIntoView(driver, ddlist);
+//			for(String str: AutomationConstants.COURSES)
+//			{
+//				for(int i=0;i<courses.size();i++)
+//				{
+//					if(str.equals(courses.get(i).getText()))
+//					{
+//						counter = counter+1;
+//					}
+//				}
+//			}
+//			if(counter != expLen)
+//			{
+//				listStatus = false;
+//			}
+//		} else listStatus = false;
+//		
+//		return listStatus;
+//	}
+	
+	public Boolean getCourseList() throws InterruptedException
+	{
+		Boolean courseListStatus = DropdownListChecker.getMultiListStatus(driver, courses, coursebtn, AutomationConstants.COURSES);
+		return courseListStatus;
+	}
 	
 	public void setCourse(String...choices) throws InterruptedException
 	{
 		coursebtn.click();
+		PageScroller.scrollIntoView(driver, ddlist);
 		for(String choice: choices)
 		{
 			for(int i=0;i<courses.size();i++)

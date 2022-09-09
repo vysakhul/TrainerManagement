@@ -1,6 +1,7 @@
 package com.trainermgm.utilities;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,5 +23,21 @@ public class Waiter {
 		WebDriverWait mywait = new WebDriverWait(driver,Duration.ofSeconds(timeout));
 		mywait.until(ExpectedConditions.visibilityOfAllElements(locator));
 		return locator;
+	}
+	
+	public static void waitForValue(List<WebElement> ele) throws InterruptedException
+	{
+		while(ele.get(0).getText().isEmpty())
+		{
+			Thread.sleep(100);
+		}
+	}
+	
+	public static void waitForValue(WebElement ele) throws InterruptedException
+	{
+		while(ele.getText().isEmpty())
+		{
+			Thread.sleep(100);
+		}
 	}
 }

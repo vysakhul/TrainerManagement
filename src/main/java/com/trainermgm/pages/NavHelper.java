@@ -1,8 +1,9 @@
 package com.trainermgm.pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -10,15 +11,6 @@ import com.trainermgm.utilities.Waiter;
 
 public class NavHelper {
 	WebDriver driver;
-	
-//	@FindBy(xpath="//tbody/tr")
-//	private WebElement adminHomeTable;
-//	
-//	@FindBy(xpath="//tbody/tr")
-//	private WebElement allocateTable;
-//	
-//	@FindBy(xpath="//tbody/tr")
-//	private WebElement viewAllocateTable;
 	
 	@FindBy(xpath="//tbody/tr")
 	private WebElement table;
@@ -90,6 +82,13 @@ public class NavHelper {
 	public void clickViewAllocationNav()
 	{
 		viewAllocationNav.click();
+	}
+	
+	public void pressTab()
+	{
+		Actions act = new Actions(driver);
+		act.sendKeys(Keys.TAB).perform();
+		
 	}
 	
 	public void waitForPage()

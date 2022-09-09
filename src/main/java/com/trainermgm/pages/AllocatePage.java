@@ -2,15 +2,15 @@ package com.trainermgm.pages;
 
 import java.util.List;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.trainermgm.constants.AutomationConstants;
+import com.trainermgm.utilities.DropdownListChecker;
 import com.trainermgm.utilities.PageScroller;
-import com.trainermgm.utilities.Waiter;
 
 public class AllocatePage {
 	WebDriver driver;
@@ -133,6 +133,62 @@ public class AllocatePage {
 		search.sendKeys(srh);
 	}
 	
+	public int rowFinder(String id) throws InterruptedException
+	{
+		int counter = 0;
+		int row=0;
+		for(int i=0;i<idCol.size();i++)
+		{
+			System.out.println("Checking row: "+i);
+			if(idCol.get(i).getText().equals(id))
+			{
+			row = i;
+			counter = counter + 1;
+			break;
+			}
+		}
+		if(counter!=0)
+		{
+		return row;
+		}
+		else return -1;
+	}
+	
+	public Boolean trainerSearch(String id) throws InterruptedException
+	{
+		int tRow=0;
+		tRow = rowFinder(id);
+		if(tRow == -1)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public void allocateEmployee(String id) throws InterruptedException
+	{
+		int eleRow = rowFinder(id);
+		if(eleRow != -1)
+		{
+		PageScroller.scrollIntoView(driver, allocateBtn.get(eleRow-1));
+		
+		for(int i=0;i<idCol.size();i++)
+		{
+			if(idCol.get(i).getText().equals(id))
+			{
+				allocateBtn.get(i).click();
+				break;
+			}
+		}
+		} else
+		{
+			System.out.println("Trainer not found");
+		}
+	}
+	
 	
 //	public void allocateWait()
 //	{
@@ -149,6 +205,11 @@ public class AllocatePage {
 	{
 		Boolean status = Id.isEnabled();
 		return status;
+	}
+	
+	public String checkID()
+	{
+		return Id.getAttribute("value");
 	}
 	
 	public Boolean statusOfNameBox()
@@ -175,10 +236,20 @@ public class AllocatePage {
 		sc.selectByVisibleText(course);
 	}
 	
+	public void clickCourseid()
+	{
+		courseid.click();
+	}
+	
 	public void setBatchid(String batch)
 	{
 		Select sc = new Select(batchid);
 		sc.selectByVisibleText(batch);
+	}
+	
+	public void clickBatchid()
+	{
+		batchid.click();
 	}
 	
 	public void setTime(String tm)
@@ -201,7 +272,60 @@ public class AllocatePage {
 		venue.sendKeys(link);
 	}
 	
-
+	public String getCourseIdError()
+	{
+		return errCourseid.getText();
+	}
+	
+	public String getBatchIdError()
+	{
+		return errBatchid.getText();
+	}
+	
+	public String getTimeError()
+	{
+		return errTime.getText();
+	}
+	
+	public String getStartDateError()
+	{
+		return errStartdate.getText();
+	}
+	
+	public String getEndDateError()
+	{
+		return errEnddate.getText();
+	}
+	
+	public String getVenueError()
+	{
+		return errVenue.getText();
+	}
+	
+	public void clickAllocateTrainer() throws InterruptedException
+	{
+		PageScroller.scrollIntoView(driver, allocateTrainerBtn);
+		allocateTrainerBtn.click();
+	}
+	
+	public Boolean allocateBtnStatus() throws InterruptedException
+	{
+		PageScroller.scrollIntoView(driver, allocateTrainerBtn);
+		return allocateTrainerBtn.isEnabled();
+	}
+	
+	public Boolean courseIdListCheck() throws InterruptedException
+	{
+		Boolean status = DropdownListChecker.getListStatus(driver, courseid, AutomationConstants.COURSE_ID);
+		return status;
+	}
+	
+	public Boolean batchIdListCheck() throws InterruptedException
+	{
+		Boolean status = DropdownListChecker.getListStatus(driver, batchid, AutomationConstants.BATCH_ID);
+		return status;
+	}
+	
 	
 	
 	
